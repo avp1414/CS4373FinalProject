@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "Gaussian_Elimination.h"
+#include "timer.h"
 
 int main(int argc, char** argv){
     char* f_name;
@@ -36,11 +37,16 @@ int main(int argc, char** argv){
         return 1;
     }
 
+    double start,end;
+    GET_TIME(start);
+
     triangularize(matrix, n);
     double det = getDeterminant(matrix, n);
     double log_abs_det = getLogAbsDeterminant(matrix, n);
 
-    printf("det=%le log(abs(det))=%le\n", det, log_abs_det);
+    GET_TIME(end);
+
+    printf("det=%le log(abs(det))=%le\nTime (seconds):\n%.3e\n", det, log_abs_det, end-start);
 
     return 0;
 }
